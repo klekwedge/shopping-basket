@@ -1,8 +1,21 @@
 import { useEffect } from 'react';
-import { AppRoot, Group, Header, Panel, PanelHeader, SimpleCell, SplitCol, SplitLayout, View } from '@vkontakte/vkui';
+import {
+  AppRoot,
+  Div,
+  Group,
+  Header,
+  List,
+  Panel,
+  PanelHeader,
+  SimpleCell,
+  SplitCol,
+  SplitLayout,
+  View,
+} from '@vkontakte/vkui';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchProducts } from '../../slices/productsSlice';
 import ProductCard from '../ProductCard/ProductCard';
+import Total from '../Total/Total';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -26,11 +39,16 @@ function App() {
             <Panel id="main">
               <PanelHeader>VK Market</PanelHeader>
               <Group header={<Header mode="secondary">Товары</Header>}>
-                <SimpleCell>
-                  {products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
-                </SimpleCell>
+                <Div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                  <Div style={{ flex: '1 1 60%' }}>
+                    {products.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </Div>
+                  <Div style={{ flex: '1 1 30%' }}>
+                    <Total />
+                  </Div>
+                </Div>
               </Group>
             </Panel>
           </View>

@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Card, Div, Footnote, Header, SimpleCell, Title } from '@vkontakte/vkui';
+import { Button, ButtonGroup, Card, Div, Footnote, Group, Header, SimpleCell, Title } from '@vkontakte/vkui';
 import { useAppDispatch } from '../../hooks/useRedux';
 import { removeFromCart, updateQuantity } from '../../slices/productsSlice';
 import { IProduct } from '../../types';
@@ -20,15 +20,13 @@ function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Card>
-      <img src={thumbnail} alt={title} width="200px" />
+    <Card style={{ display: 'flex', marginBottom: '40px' }}>
+      <img src={thumbnail} alt={title} width="200px" height='200px' />
       <Div>
-        <SimpleCell>
-          <Title level="2">{title}</Title>
-          <Footnote>Price: ${price}</Footnote>
-        </SimpleCell>
+        <Title level="2">{title}</Title>
+        <Footnote>Цена: ${price}</Footnote>
 
-        <ButtonGroup>
+        <ButtonGroup style={{ marginTop: '15px' }}>
           <Button type="button" onClick={() => handleQuantityChange(quantity - 1)} disabled={quantity === 1}>
             -
           </Button>
