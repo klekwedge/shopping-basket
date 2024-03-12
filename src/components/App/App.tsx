@@ -1,9 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
-import { addToCart, updateQuantity, removeFromCart } from './redux/cartSlice';
-import Cart from './Cart';
-import Total from './Total';
+import { useEffect } from 'react';
+import { AppRoot, Group, Header, Panel, PanelHeader, SimpleCell, SplitCol, SplitLayout, View } from '@vkontakte/vkui';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchCards } from '../../slices/cardsSlice';
 
@@ -19,7 +15,23 @@ function App() {
     return <p>Loading...</p>;
   }
 
-  return <div className="app">test</div>;
+  return (
+    <AppRoot mode="embedded">
+      <SplitLayout header={<PanelHeader delimiter="none" />}>
+        <SplitCol autoSpaced>
+          <View activePanel="main">
+            <Panel id="main">
+              <PanelHeader>VK Market</PanelHeader>
+              <Group header={<Header mode="secondary">Товары</Header>}>
+                {' '}
+                <SimpleCell>Hello</SimpleCell>
+              </Group>
+            </Panel>
+          </View>
+        </SplitCol>
+      </SplitLayout>
+    </AppRoot>
+  );
 }
 
 export default App;
