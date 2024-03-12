@@ -2,6 +2,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { IProduct, IProductResponse, TLoading } from '../types';
+import axiosInstance from '../axios';
 
 export type ProductsState = {
     products: IProduct[];
@@ -13,8 +14,8 @@ const initialState: ProductsState = {
     productsLoadingStatus: 'loading',
 };
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async (url: string) => {
-    const response = await axios.get(url);
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
+    const response = await axiosInstance.get('/1');
     return response.data;
 });
 

@@ -1,5 +1,18 @@
 import { useEffect } from 'react';
-import { AppRoot, Div, Group, Header, Panel, PanelHeader, Spinner, SplitCol, SplitLayout, View } from '@vkontakte/vkui';
+import {
+  AppRoot,
+  Div,
+  Group,
+  Header,
+  Panel,
+  PanelHeader,
+  Spinner,
+  SplitCol,
+  SplitLayout,
+  Title,
+  View,
+} from '@vkontakte/vkui';
+import { Icon56LogoVkColor } from '@vkontakte/icons';
 import Total from '../Total/Total';
 import ProductList from '../ProductList/ProductList';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
@@ -10,7 +23,7 @@ function App() {
   const { products, productsLoadingStatus } = useAppSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(fetchProducts('https://dummyjson.com/carts/1'));
+    dispatch(fetchProducts());
   }, []);
 
   return (
@@ -19,10 +32,15 @@ function App() {
         <SplitCol autoSpaced>
           <View activePanel="main">
             <Panel id="main">
-              <PanelHeader>VK Market</PanelHeader>
+              <PanelHeader>
+                <Div style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '20px' }}>
+                  <Icon56LogoVkColor width={50} />
+                  <Title level="1"> VK Market</Title>
+                </Div>
+              </PanelHeader>
               {productsLoadingStatus === 'idle' && (
-                <Group header={<Header mode="secondary">Корзина</Header>}>
-                  <Div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                <Group header={<Header mode="secondary">Корзина товаров</Header>}>
+                  <Div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
                     <ProductList />
                     <Div style={{ flex: '1 1 30%' }}>{products.length ? <Total /> : ''}</Div>
                   </Div>

@@ -1,3 +1,4 @@
+import { Div, Paragraph } from '@vkontakte/vkui';
 import { useAppSelector } from '../../hooks/useRedux';
 
 function Total() {
@@ -5,9 +6,9 @@ function Total() {
   const total = products.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
-    <div className="total">
-      <p>Итоговая цена: {total} $.</p>
-    </div>
+    <Div>
+      <Paragraph>Итоговая цена: ${total}.</Paragraph>
+    </Div>
   );
 }
 
