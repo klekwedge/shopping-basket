@@ -1,21 +1,9 @@
 import { useEffect } from 'react';
-import {
-  AppRoot,
-  Div,
-  Group,
-  Header,
-  List,
-  Panel,
-  PanelHeader,
-  SimpleCell,
-  SplitCol,
-  SplitLayout,
-  View,
-} from '@vkontakte/vkui';
+import { AppRoot, Div, Group, Header, Panel, PanelHeader, Spinner, SplitCol, SplitLayout, View } from '@vkontakte/vkui';
+import Total from '../Total/Total';
+import ProductList from '../ProductList/ProductList';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchProducts } from '../../slices/productsSlice';
-import ProductCard from '../ProductCard/ProductCard';
-import Total from '../Total/Total';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -25,31 +13,23 @@ function App() {
     dispatch(fetchProducts('https://dummyjson.com/carts/1'));
   }, []);
 
-  if (productsLoadingStatus === 'loading') {
-    return <p>Loading...</p>;
-  }
-
-  console.log(products);
-
   return (
     <AppRoot mode="embedded">
-      <SplitLayout header={<PanelHeader delimiter="none" />}>
+      <SplitLayout>
         <SplitCol autoSpaced>
           <View activePanel="main">
             <Panel id="main">
               <PanelHeader>VK Market</PanelHeader>
-              <Group header={<Header mode="secondary">Товары</Header>}>
-                <Div style={{ display: 'flex', alignItems: 'flex-start' }}>
-                  <Div style={{ flex: '1 1 60%' }}>
-                    {products.map((product) => (
-                      <ProductCard key={product.id} product={product} />
-                    ))}
+              {productsLoadingStatus === 'idle' && (
+                <Group header={<Header mode="secondary">Корзина</Header>}>
+                  <Div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                    <ProductList />
+                    <Div style={{ flex: '1 1 30%' }}>{products.length ? <Total /> : ''}</Div>
                   </Div>
-                  <Div style={{ flex: '1 1 30%' }}>
-                    <Total />
-                  </Div>
-                </Div>
-              </Group>
+                </Group>
+              )}
+
+              {productsLoadingStatus === 'loading' && <Spinner size="large" />}
             </Panel>
           </View>
         </SplitCol>
