@@ -3,13 +3,13 @@ export interface IProduct {
     "id": number,
     "title": string,
     "price": number,
-    "description": string,
-    "category": string,
-    "image": string,
-    "rating": {
-        "rate": number,
-        "count": number
-    }
+    "quantity": number,
+    "total": number,
+    "discountPercentage": number,
+    "discountedPrice": number,
+    "thumbnail": string
 }
+
+// ! response
 
 export type Loading = 'idle' | 'loading' | 'error'

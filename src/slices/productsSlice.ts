@@ -21,7 +21,26 @@ export const fetchProducts = createAsyncThunk('products/fetchProducts', async (u
 const productsSlice = createSlice({
     name: 'products',
     initialState,
-    reducers: {},
+    reducers: {
+        addToCart: (state, action) => {
+            const existingItem = state.products.find((item) => item.id === action.payload.id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                state.products.push({ ...action.payload, quantity: 1 });
+            }
+        },
+        updateQuantity: (state, action) => {
+            const { id, quantity } = action.payload;
+            const item = state.products.find((product) => product.id === id);
+            if (item) {
+                item.quantity = quantity;
+            }
+        },
+        removeFromCart: (state, action) => {
+            state.products = state.products.filter((item) => item.id !== action.payload);
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchProducts.pending, (state) => {
@@ -29,7 +48,8 @@ const productsSlice = createSlice({
             })
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.productsLoadingStatus = 'idle';
-                state.products = action.payload;
+                console.log(action.payload);
+                state.products = action.payload.products;
             })
             .addCase(fetchProducts.rejected, (state) => {
                 state.productsLoadingStatus = 'error';
@@ -37,6 +57,9 @@ const productsSlice = createSlice({
     },
 });
 
-export const { reducer } = productsSlice;
+export const { reducer, actions } = productsSlice;
 
 export default reducer;
+export const {
+    addToCart, updateQuantity, removeFromCart
+} = actions

@@ -1,37 +1,37 @@
+import { useAppDispatch } from '../../hooks/useRedux';
+import { removeFromCart, updateQuantity } from '../../slices/productsSlice';
 import { IProduct } from '../../types';
 
 interface ProductCardProps {
   product: IProduct;
-  onQuantityChange: () => void;
-  onDelete: () => void;
 }
 
-function ProductCard({ product, onQuantityChange, onDelete }: ProductCardProps) {
-  const { id, title, description, image, price } = product;
+function ProductCard({ product }: ProductCardProps) {
+  const dispatch = useAppDispatch();
+  const { id, title, thumbnail, price, quantity } = product;
 
-  const handleQuantityChange = () => {
-    // onQuantityChange(id, newQuantity);
+  const handleQuantityChange = (newQuantity: number) => {
+    dispatch(updateQuantity({ id, quantity: newQuantity }));
   };
 
   const handleDelete = () => {
-    // onDelete(id);
-  };
+    dispatch(removeFromCart(id));
+  }
 
   return (
     <div className="product-card">
-      <img src={image} alt={title} width="200px" />
+      <img src={thumbnail} alt={title} width="200px" />
       <div>
         <h3>{title}</h3>
-        <p>{description}</p>
         <p>Price: ${price}</p>
         <div>
-          {/* <button type="button" onClick={() => handleQuantityChange(quantity - 1)} disabled={quantity === 1}>
+          <button type="button" onClick={() => handleQuantityChange(quantity - 1)} disabled={quantity === 1}>
             -
-          </button> */}
-          {/* <span>{quantity}</span> */}
-          {/* <button type="button" onClick={() => handleQuantityChange(quantity + 1)} disabled={quantity === 10}>
+          </button>
+          <span>{quantity}</span>
+          <button type="button" onClick={() => handleQuantityChange(quantity + 1)} disabled={quantity === 10}>
             +
-          </button> */}
+          </button>
           <button type="button" onClick={handleDelete}>
             Delete
           </button>

@@ -9,12 +9,14 @@ function App() {
   const { products, productsLoadingStatus } = useAppSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(fetchProducts('https://fakestoreapi.com/products'));
+    dispatch(fetchProducts('https://dummyjson.com/carts/1'));
   }, []);
 
   if (productsLoadingStatus === 'loading') {
     return <p>Loading...</p>;
   }
+
+  console.log(products);
 
   return (
     <AppRoot mode="embedded">
