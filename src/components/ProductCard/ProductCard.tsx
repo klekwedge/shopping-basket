@@ -1,3 +1,4 @@
+import { Button, ButtonGroup, Card, Div, Footnote, Header, SimpleCell, Title } from '@vkontakte/vkui';
 import { useAppDispatch } from '../../hooks/useRedux';
 import { removeFromCart, updateQuantity } from '../../slices/productsSlice';
 import { IProduct } from '../../types';
@@ -16,28 +17,31 @@ function ProductCard({ product }: ProductCardProps) {
 
   const handleDelete = () => {
     dispatch(removeFromCart(id));
-  }
+  };
 
   return (
-    <div className="product-card">
+    <Card>
       <img src={thumbnail} alt={title} width="200px" />
-      <div>
-        <h3>{title}</h3>
-        <p>Price: ${price}</p>
-        <div>
-          <button type="button" onClick={() => handleQuantityChange(quantity - 1)} disabled={quantity === 1}>
+      <Div>
+        <SimpleCell>
+          <Title level="2">{title}</Title>
+          <Footnote>Price: ${price}</Footnote>
+        </SimpleCell>
+
+        <ButtonGroup>
+          <Button type="button" onClick={() => handleQuantityChange(quantity - 1)} disabled={quantity === 1}>
             -
-          </button>
+          </Button>
           <span>{quantity}</span>
-          <button type="button" onClick={() => handleQuantityChange(quantity + 1)} disabled={quantity === 10}>
+          <Button type="button" onClick={() => handleQuantityChange(quantity + 1)} disabled={quantity === 10}>
             +
-          </button>
-          <button type="button" onClick={handleDelete}>
+          </Button>
+          <Button type="button" onClick={handleDelete}>
             Delete
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </ButtonGroup>
+      </Div>
+    </Card>
   );
 }
 

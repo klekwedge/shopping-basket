@@ -49,7 +49,7 @@ const productsSlice = createSlice({
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.productsLoadingStatus = 'idle';
                 console.log(action.payload);
-                state.products = action.payload.products;
+                state.products = action.payload.products.map(product => ({...product, quantity: 1}));
             })
             .addCase(fetchProducts.rejected, (state) => {
                 state.productsLoadingStatus = 'error';
