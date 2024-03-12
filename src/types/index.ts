@@ -1,5 +1,5 @@
 
-export interface ICard {
+export interface IProduct {
     "id": number,
     "title": string,
     "price": number,

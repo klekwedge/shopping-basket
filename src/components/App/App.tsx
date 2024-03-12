@@ -1,17 +1,18 @@
 import { useEffect } from 'react';
 import { AppRoot, Group, Header, Panel, PanelHeader, SimpleCell, SplitCol, SplitLayout, View } from '@vkontakte/vkui';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import { fetchCards } from '../../slices/cardsSlice';
+import { fetchProducts } from '../../slices/productsSlice';
+import ProductCard from '../ProductCard/ProductCard';
 
 function App() {
   const dispatch = useAppDispatch();
-  const { cards, cardsLoadingStatus } = useAppSelector((state) => state.cards);
+  const { products, productsLoadingStatus } = useAppSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(fetchCards('https://fakestoreapi.com/products'));
+    dispatch(fetchProducts('https://fakestoreapi.com/products'));
   }, []);
 
-  if (cardsLoadingStatus === 'loading') {
+  if (productsLoadingStatus === 'loading') {
     return <p>Loading...</p>;
   }
 
@@ -23,8 +24,11 @@ function App() {
             <Panel id="main">
               <PanelHeader>VK Market</PanelHeader>
               <Group header={<Header mode="secondary">Товары</Header>}>
-                {' '}
-                <SimpleCell>Hello</SimpleCell>
+                <SimpleCell>
+                  {products.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </SimpleCell>
               </Group>
             </Panel>
           </View>
