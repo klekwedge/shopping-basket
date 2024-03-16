@@ -50,7 +50,7 @@ const productsSlice = createSlice({
             .addCase(fetchProducts.fulfilled, (state, action: PayloadAction<IProductResponse>) => {
                 state.productsLoadingStatus = 'idle';
                 // поскольку API не предоставляет описание товара, то я добавил "текст-рыбу"
-                state.products = action.payload.products.map(product => ({ ...product, quantity: 1, description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae tempora quos ipsa nihil omnis quidem officia impedit expedita. Nobis ea ut omnis distinctio sint nisi doloribus accusamus incidunt quam architecto.' }));
+                state.products = action.payload.products.map(product => ({ ...product, description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae tempora quos ipsa nihil omnis quidem officia impedit expedita. Nobis ea ut omnis distinctio sint nisi doloribus accusamus incidunt quam architecto.' }));
             })
             .addCase(fetchProducts.rejected, (state) => {
                 state.productsLoadingStatus = 'error';
