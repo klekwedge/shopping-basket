@@ -35,7 +35,7 @@ function App() {
               <PanelHeader>
                 <Div style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '20px' }}>
                   <Icon56LogoVkColor width={50} />
-                  <Title level="1"> VK Market</Title>
+                  <Title level="1"> VK Маркет</Title>
                 </Div>
               </PanelHeader>
               {productsLoadingStatus === 'idle' && (
