@@ -22,13 +22,15 @@ function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Card style={{ display: 'flex', marginBottom: '40px' }}>
-      <img src={thumbnail} alt={title} width="200px" height="200px" />
       <Div>
-        <Title level="2" style={{ marginBottom: '5px' }}>
+        <img src={thumbnail} alt={title} width="200px" height="200px" style={{ borderRadius: '5px' }} />
+      </Div>
+      <Div>
+        <Title level="2" style={{ marginBottom: '5px', fontWeight: '700' }}>
           {title}
         </Title>
-        <Paragraph >{description}</Paragraph>
-        <Headline style={{ marginTop: '15px' }}>
+        <Paragraph>{description}</Paragraph>
+        <Headline style={{ marginTop: '15px', fontWeight: '500', fontSize: '17px' }}>
           Цена: {price * quantity} руб. ({price} руб. / шт.)
         </Headline>
         <ButtonGroup style={{ marginTop: '15px', display: 'flex', alignItems: 'center' }}>
