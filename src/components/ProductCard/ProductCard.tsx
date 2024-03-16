@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Card, Div, Footnote, IconButton, Title } from '@vkontakte/vkui';
+import { Button, ButtonGroup, Card, Div, Footnote, Headline, IconButton, Paragraph, Title } from '@vkontakte/vkui';
 import { Icon24Delete } from '@vkontakte/icons';
 import { useAppDispatch } from '../../hooks/useRedux';
 import { removeFromCart, updateQuantity } from '../../slices/productsSlice';
@@ -10,7 +10,7 @@ interface ProductCardProps {
 
 function ProductCard({ product }: ProductCardProps) {
   const dispatch = useAppDispatch();
-  const { id, title, thumbnail, price, quantity } = product;
+  const { id, title, thumbnail, price, quantity, description } = product;
 
   const handleQuantityChange = (newQuantity: number) => {
     dispatch(updateQuantity({ id, quantity: newQuantity }));
@@ -27,9 +27,10 @@ function ProductCard({ product }: ProductCardProps) {
         <Title level="2" style={{ marginBottom: '5px' }}>
           {title}
         </Title>
-        <Footnote>
-          Цена: ${price * quantity} (${price} / шт)
-        </Footnote>
+        <Paragraph >{description}</Paragraph>
+        <Headline style={{ marginTop: '15px' }}>
+          Цена: {price * quantity} руб. ({price} руб. / шт.)
+        </Headline>
         <ButtonGroup style={{ marginTop: '15px', display: 'flex', alignItems: 'center' }}>
           <Button type="button" onClick={() => handleQuantityChange(quantity - 1)} disabled={quantity === 1}>
             -

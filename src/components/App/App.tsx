@@ -42,11 +42,10 @@ function App() {
                 <Group header={<Header mode="secondary">Корзина товаров</Header>}>
                   <Div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
                     <ProductList />
-                    <Div style={{ flex: '1 1 30%' }}>{products.length ? <Total /> : ''}</Div>
+                    <Div style={{ flex: '1 1 25%' }}>{products.length ? <Total /> : ''}</Div>
                   </Div>
                 </Group>
               )}
-
               {productsLoadingStatus === 'loading' && <Spinner size="large" />}
             </Panel>
           </View>

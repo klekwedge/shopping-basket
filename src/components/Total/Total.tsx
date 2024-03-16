@@ -7,7 +7,7 @@ function Total() {
 
   return (
     <Div>
-      <Paragraph>Итоговая цена: ${total}.</Paragraph>
+      <Paragraph>Итого: {total} руб.</Paragraph>
     </Div>
   );
 }

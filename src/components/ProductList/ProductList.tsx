@@ -7,7 +7,7 @@ function ProductList() {
   const { products } = useAppSelector((state) => state.products);
 
   return (
-    <Div style={{ flex: '1 1 60%' }}>
+    <Div style={{ flex: '1 1 75%' }}>
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

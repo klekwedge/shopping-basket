@@ -8,6 +8,7 @@ export interface IProduct {
     discountPercentage: number,
     discountedPrice: number,
     thumbnail: string
+    description: string;
 }
 
 export interface IProductResponse {
