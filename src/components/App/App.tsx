@@ -29,7 +29,7 @@ function App() {
   return (
     <AppRoot mode="embedded">
       <View activePanel="main">
-        <Panel id="main" style={{padding: '20px 15px'}}>
+        <Panel id="main">
           <PanelHeader>
             <Div style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '20px' }}>
               <Icon56LogoVkColor width={50} />
